@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Arial:wght@700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Hegemony";
+    src: url("/fonts/Hegemony.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 10, 10, 10;
+    }
+}
+
+body {
+    min-height: 100vh;
+
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.75),
+            rgb(var(--background-end-rgb))
+        ),
+        url("/images/grid.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
