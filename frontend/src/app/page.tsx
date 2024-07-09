@@ -13,7 +13,7 @@ export default function Home() {
                     />
                 </div>
 
-                <b className="text-center text-3xl text-white font-hegemony">
+                <b className="text-center text-3xl mt-5 text-white font-hegemony">
                     Vardis Transfer system
                 </b>
             </div>
