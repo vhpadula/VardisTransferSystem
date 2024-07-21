@@ -2,18 +2,22 @@
 
 import React from "react";
 import Image from "next/image"; // Assuming you're using Next.js for image handling
-
+import Link from "next/link";
 const ClassGrid: React.FC = () => {
     return (
         <div className="w-full h-full grid grid-cols-2 gap-20">
-            <button className="relative w-30 my-10 px-12 py-12">
+            <Link
+                href="/Player/2/working_class"
+                className="relative w-30 my-10 px-12 py-12"
+            >
                 <Image
                     src={"/images/working-class.svg"}
                     alt={"working-class"}
                     fill={true}
                 />
-            </button>
-            <button
+            </Link>
+            <Link
+                href="/Player/2/capitalist"
                 className="relative w-30 my-10 px-12 py-12"
                 onClick={() => console.log("clicked")}
             >
@@ -22,17 +26,23 @@ const ClassGrid: React.FC = () => {
                     alt={"capitalist"}
                     fill={true}
                 />
-            </button>
-            <button className="relative w-30 my-10 px-12 py-12">
+            </Link>
+            <Link
+                href="/Player/2/middle_class"
+                className="relative w-30 my-10 px-12 py-12"
+            >
                 <Image
                     src={"/images/middle-class.svg"}
                     alt={"middle-class"}
                     fill={true}
                 />
-            </button>
-            <button className="relative w-30 my-10 px-12 py-12">
+            </Link>
+            <Link
+                href="/Player/2/state"
+                className="relative w-30 my-10 px-12 py-12"
+            >
                 <Image src={"/images/state.svg"} alt={"state"} fill={true} />
-            </button>
+            </Link>
         </div>
     );
 };
