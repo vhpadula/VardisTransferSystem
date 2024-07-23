@@ -1,5 +1,7 @@
 # VTS Frontend
-The Frontend is built with NextJS using its major resources like Server Components, App router and API routes. The architecture is oriented to the Atomic Design
+The Frontend is built with NextJS using its major resources like Server Components, App router and API routes. The architecture is oriented to the Atomic Design. The UI was designed with Figma.
+## Figma
+The Figma Design page can be found [Here](https://www.figma.com/design/RjgFaDs90oNjny0jRH84sK/VTS?node-id=0-1&t=5ijgxZiGIeL7hGCi-1)
 ## App Router
 The routing system is built in with the folder structure, where every page is contained in the page.tsx file. 
 ## Atomic Design
