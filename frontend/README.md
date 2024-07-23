@@ -1,3 +1,10 @@
+# VTS Frontend
+The Frontend is built with NextJS using its major resources like Server Components, App router and API routes. The architecture is oriented to the Atomic Design
+## App Router
+The routing system is built in with the folder structure, where every page is contained in the page.tsx file. 
+## Atomic Design
+Every component is segregated into 3 categories: Atoms, Molecules and Organisms, each with itsa own scale of complexity.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
