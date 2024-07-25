@@ -1,12 +1,28 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+import cors from "cors"; // Import the cors package
+
 import { registerSocketHandlers } from "./socketHandlers";
-import { redisClient, initializeBalancesTable } from "./redisClient";
+import {
+    redisClient,
+    initializeBalancesTable,
+    getBalance,
+} from "./redisClient";
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
-
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000", // Replace with your client URL
+        methods: ["GET", "POST"],
+    },
+});
+// Use the cors middleware
+app.use(
+    cors({
+        origin: "http://localhost:3000", // Replace with your client URL
+    })
+);
 redisClient.connect();
 registerSocketHandlers(io);
 
@@ -20,6 +36,30 @@ app.post("/create-room", (req, res) => {
 
     // Send the roomId as the response
     res.send(roomId);
+});
+
+app.get("/get-balance", async (req, res) => {
+    const { roomID, playerClass } = req.query;
+
+    try {
+        // Implement your logic to retrieve the balance for the given roomId and playerClass
+        const balance = await getBalance(
+            roomID as string,
+            playerClass as string
+        );
+        console.log(balance);
+        if (balance === undefined || balance === null) {
+            // If balance is not found, send a 404 Not Found status
+            res.sendStatus(404);
+        } else {
+            // Send the balance as the response, converting it to a string
+            res.send(balance.toString());
+        }
+    } catch (error) {
+        console.error("Error retrieving balance:", error);
+        // Send an appropriate error status code and message
+        res.sendStatus(500); // Internal Server Error
+    }
 });
 
 function generateRoomId() {

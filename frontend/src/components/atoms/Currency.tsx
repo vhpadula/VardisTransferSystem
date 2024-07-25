@@ -1,18 +1,36 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { socket, getCurrency } from "../../api";
+interface CurrencyProps {
+    playerClass: string;
+    roomID: string;
+}
 
-const Currency: React.FC = () => {
+const Currency: React.FC<CurrencyProps> = ({ playerClass, roomID }) => {
     const [currencyValue, setCurrencyValue] = useState<number>(0);
 
-    const updateCurrencyValue = () => {
-        // Replace this with your logic to fetch the updated currency value
-        const newCurrencyValue = Math.floor(Math.random() * 100); // Example value
+    useEffect(() => {
+        // Call getCurrency when the component is mounted
+        const fetchCurrency = async () => {
+            try {
+                const currency = await getCurrency(roomID, playerClass);
+                setCurrencyValue(currency);
+            } catch (error) {
+                console.error("Error fetching currency:", error);
+            }
+        };
 
-        setCurrencyValue(newCurrencyValue);
-    };
+        fetchCurrency();
 
-    setInterval(updateCurrencyValue, 1000); // Update every  second. simulating change from server
+        function onBalanceUpdated(player: string, newBalance: number) {
+            if (player === playerClass) {
+                console.log("Balance updated:", newBalance);
+                setCurrencyValue(newBalance); // Update the currency value with the new balance
+            }
+        }
 
+        socket.on("balanceUpdate", onBalanceUpdated); // Listen to balanceUpdated event
+    }, [roomID, playerClass]);
     return (
         <div>
             <span>

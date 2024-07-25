@@ -9,10 +9,10 @@ type TransferOptionsProps = {
 
 const TransferOptions: React.FC<TransferOptionsProps> = ({ player }) => {
     const opponents: { [key: string]: string[] } = {
-        working_class: ["capitalist", "middle-class", "state"],
-        capitalist: ["working-class", "middle-class", "state"],
-        middle_class: ["working-class", "capitalist", "state"],
-        state: ["working-class", "capitalist", "middle-class"],
+        working_class: ["capitalist", "middle_class", "state"],
+        capitalist: ["working_class", "middle_class", "state"],
+        middle_class: ["working_class", "capitalist", "state"],
+        state: ["working_class", "capitalist", "middle-class"],
     };
     const selectedOpponents = opponents[player];
 
@@ -57,7 +57,8 @@ const TransferOptions: React.FC<TransferOptionsProps> = ({ player }) => {
             {isPlayerModalOpen && (
                 <PlayerModal
                     onClose={closePlayerModal}
-                    class={selectedOpponent}
+                    classSelected={selectedOpponent}
+                    player={player}
                 />
             )}
             {isBankModalOpen && <BankModal onClose={closeBankModal} />}

@@ -2,21 +2,27 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { PrimaryBtn, TextBox } from "../atoms";
-
+import { socket } from "../../api";
 interface PlayerModalProps {
     onClose: () => void;
-    class?: string; // Optional prop
+    classSelected: string; // Optional prop
+    player: string; // Replace with the actual player
 }
 
 const PlayerModal: React.FC<PlayerModalProps> = ({
     onClose,
-    class: className,
+    classSelected,
+    player,
 }) => {
-    const inputRef = useRef<HTMLInputElement>(null); // Step 1: Create a ref for the input field
-
+    const inputRef = useRef<HTMLInputElement>(null);
+    function transfer(amount: number) {
+        const fromPlayer = player;
+        const toPlayer = classSelected;
+        socket.emit("transferMoney", fromPlayer, toPlayer, amount);
+    }
     useEffect(() => {
-        inputRef.current?.focus(); // Step 2: Focus on the input field when the modal is opened
-    }, []); // Empty dependency array means this effect runs once on mount
+        inputRef.current?.focus();
+    }, []);
 
     return (
         <div className="fixed  inset-0 bg-black bg-opacity-50 text-white flex justify-center items-center">
@@ -32,8 +38,8 @@ const PlayerModal: React.FC<PlayerModalProps> = ({
                         <p className="text-2xl">Paying:</p>
                         <div className="relative w-20 mb-5 p-10">
                             <Image
-                                src={`/images/${className}.svg`}
-                                alt={`/images/${className}.svg`}
+                                src={`/images/${classSelected}.svg`}
+                                alt={`/images/${classSelected}.svg`}
                                 fill={true}
                             />
                         </div>
@@ -45,7 +51,9 @@ const PlayerModal: React.FC<PlayerModalProps> = ({
                     <PrimaryBtn
                         className="w-[75%] mt-5"
                         text="Transfer"
-                        onClick={onClose}
+                        onClick={() =>
+                            transfer(Number(inputRef.current?.value))
+                        }
                     />
                 </div>
             </div>

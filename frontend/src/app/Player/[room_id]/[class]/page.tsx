@@ -9,7 +9,7 @@ export default function Room({
     return (
         <>
             <VTSTitleSm />
-            <Wallet player={params.class} />
+            <Wallet player={params.class} roomID={params.room_id} />
             <TransferOptions player={params.class} />
         </>
     );

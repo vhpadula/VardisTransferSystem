@@ -1,17 +1,19 @@
+"use client";
 import Image from "next/image"; // Import Image from 'next/image'
 import { Currency } from "../atoms";
 interface WalletProps {
     player: string;
+    roomID: string;
 }
 
 const playerImages: { [key: string]: string } = {
-    working_class: "/images/working-class.svg",
+    working_class: "/images/working_class.svg",
     capitalist: "/images/capitalist.svg",
-    middle_class: "/images/middle-class.svg",
+    middle_class: "/images/middle_class.svg",
     state: "/images/state.svg",
 };
 
-const Wallet: React.FC<WalletProps> = ({ player }) => {
+const Wallet: React.FC<WalletProps> = ({ player, roomID }) => {
     const imageSrc = playerImages[player];
 
     return (
@@ -23,11 +25,11 @@ const Wallet: React.FC<WalletProps> = ({ player }) => {
                 <p className="text-3xl">Wallet</p>
                 {player === "capitalist" && (
                     <>
-                        <Currency />
+                        <Currency playerClass={player} roomID={roomID} />
                         <p className="text-3xl mt-5">Capital</p>
                     </>
                 )}
-                <Currency />
+                <Currency playerClass={player} roomID={roomID} />
             </span>
         </div>
     );

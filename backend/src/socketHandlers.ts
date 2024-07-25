@@ -17,11 +17,8 @@ const registerSocketHandlers = (io: Server) => {
             if (roomExists.exists) {
                 socket.join(roomID);
                 console.log(`Client joined room ${roomID}`);
-
-                socket.to(roomID).emit("PlayerJoined", roomExists.table);
             } else {
                 console.log(`Room ${roomID} does not exist`);
-                // Optionally, notify the client about the non-existent room
                 socket.emit("roomError", "Room does not exist");
             }
 
