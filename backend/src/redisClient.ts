@@ -19,7 +19,8 @@ interface PlayerInfo {
 
 const initialBalances: { [key: string]: number } = {
     working_class: 30,
-    capitalist: 120,
+    capitalist: 0,
+    capitalist_capital: 120,
     middle_class: 40,
     state: 120,
     bank: 1204,

@@ -18,7 +18,9 @@ const PlayerModal: React.FC<PlayerModalProps> = ({
     function transfer(amount: number) {
         const fromPlayer = player;
         const toPlayer = classSelected;
+        console.log(fromPlayer, toPlayer, amount);
         socket.emit("transferMoney", fromPlayer, toPlayer, amount);
+        onClose();
     }
     useEffect(() => {
         inputRef.current?.focus();

@@ -13,14 +13,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000", // Replace with your client URL
-        methods: ["GET", "POST"],
+        origin: true, // Allow any origin
     },
 });
 // Use the cors middleware
 app.use(
     cors({
-        origin: "http://localhost:3000", // Replace with your client URL
+        origin: true, // Allow any origin
     })
 );
 redisClient.connect();

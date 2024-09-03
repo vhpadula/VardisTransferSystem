@@ -1,24 +1,34 @@
 "use client";
-import React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ButtonGroup } from "../molecules";
 import Link from "next/link";
 import { PrimaryBtn } from "../atoms";
+import { createRoom } from "@/api";
+
 interface ModeSelectionProps {
     className?: string;
 }
 
-export const ModeSelection: React.FC<ModeSelectionProps> = ({ className }) => {
+const ModeSelection: React.FC<ModeSelectionProps> = ({ className }) => {
+    const [roomId, setRoomId] = useState<string>("");
+    const router = useRouter();
+
+    const handleCreateRoom = async () => {
+        const newRoomId = await createRoom();
+        setRoomId(newRoomId);
+        router.push(`/Room/${newRoomId}`);
+    };
+
     return (
         <div className={className}>
             <div className={className}>
                 <div>
-                    <Link href="/Room/1" passHref>
-                        <PrimaryBtn
-                            onClick={() => console.log("Clicked Create Room")}
-                            text="Create Room"
-                            className="mt-4"
-                        />
-                    </Link>
+                    <PrimaryBtn
+                        onClick={handleCreateRoom}
+                        text="Create Room"
+                        className="mt-4"
+                    />
                 </div>
                 <div>
                     <Link href="/Player" passHref>

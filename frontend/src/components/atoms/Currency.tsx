@@ -23,6 +23,7 @@ const Currency: React.FC<CurrencyProps> = ({ playerClass, roomID }) => {
         fetchCurrency();
 
         function onBalanceUpdated(player: string, newBalance: number) {
+            console.log("Balance updated:", player, newBalance);
             if (player === playerClass) {
                 console.log("Balance updated:", newBalance);
                 setCurrencyValue(newBalance); // Update the currency value with the new balance

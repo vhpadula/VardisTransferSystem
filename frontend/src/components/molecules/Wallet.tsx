@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image"; // Import Image from 'next/image'
-import { Currency } from "../atoms";
+import { Currency, PrimaryBtn } from "../atoms";
 interface WalletProps {
     player: string;
     roomID: string;
@@ -23,13 +23,17 @@ const Wallet: React.FC<WalletProps> = ({ player, roomID }) => {
             </div>
             <span className="flex flex-col justify-center items-center">
                 <p className="text-3xl">Wallet</p>
+                <Currency playerClass={player} roomID={roomID} />
+
                 {player === "capitalist" && (
                     <>
-                        <Currency playerClass={player} roomID={roomID} />
                         <p className="text-3xl mt-5">Capital</p>
+                        <Currency
+                            playerClass={"capitalist_capital"}
+                            roomID={roomID}
+                        />
                     </>
                 )}
-                <Currency playerClass={player} roomID={roomID} />
             </span>
         </div>
     );

@@ -50,14 +50,6 @@ const registerSocketHandlers = (io: Server) => {
                                 receiverId
                             );
 
-                            // Notify the sender and receiver of their new balances
-                            socket
-                                .to(roomID)
-                                .emit(
-                                    "balanceUpdate",
-                                    senderId,
-                                    senderNewBalance
-                                ); // Sender's new balance
                             socket
                                 .to(roomID)
                                 .emit(
@@ -65,14 +57,25 @@ const registerSocketHandlers = (io: Server) => {
                                     receiverId,
                                     receiverNewBalance
                                 ); // Receiver's new balance within the room
+
+                            socket
+                                .to(roomID)
+                                .emit(
+                                    "balanceUpdate",
+                                    senderId,
+                                    senderNewBalance
+                                );
+
+                            socket.emit(
+                                "balanceUpdate",
+                                senderId,
+                                senderNewBalance
+                            ); // Sender's new balance
                         }
                     } catch (error) {
                         console.error("Error during money transfer:", error);
                         // Optionally, notify the sender about the failure
-                        socket.emit(
-                            "transferError",
-                            "Failed to transfer money."
-                        );
+                        socket.emit("transferError", senderId, false);
                     }
                 }
             );
